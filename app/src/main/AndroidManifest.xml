@@ -13,20 +13,22 @@
         android:theme="@style/Theme.BloodBondApp"
         tools:targetApi="31">
         <activity
+            android:name=".Activities.RegisterActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activities.SplashScreen"
             android:exported="true">
+
             <!-- Closing tag for the SplashScreen activity -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".Activities.MainActivity"
-            android:exported="true">
-
-        </activity>
+            android:exported="true"></activity>
     </application>
 
 </manifest>
