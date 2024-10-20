@@ -99,15 +99,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
         </com.google.android.material.textfield.TextInputLayout>
-        
+
         <Button
             android:id="@+id/submit_button"
+            android:backgroundTint="@color/red"
             android:textColor="@color/white"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:background="@drawable/button_bg"
             android:textAllCaps="false"
-            android:text="Become a Doonor"
+            android:text="Become a Donor"
             android:layout_margin="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
