@@ -1,5 +1,6 @@
 package com.example.bloodbondapp.Activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -43,12 +44,50 @@ public class RegisterActivity extends AppCompatActivity {
                 blood_group = bloodGroupEt.getText().toString();
                 password = passwordEt.getText().toString();
                 mobile = mobileEt.getText().toString();
-                if (name.length()==0 || city.length()==0 || blood_group.length()==0 || password.length()==0 || mobile.length()==0){
+                Database db =new Database(getApplicationContext(),"bloodbondapp",null,1);
+
+                if (name.isEmpty() || city.isEmpty() || blood_group.isEmpty() || password.isEmpty() || mobile.isEmpty()) {
                     Toast.makeText(RegisterActivity.this, "Please fill all the details", Toast.LENGTH_SHORT).show();
-                }else{
+                } else {
+                    if (!isValidBloodType(blood_group)) {
+                        Toast.makeText(RegisterActivity.this, "Invalid blood type.\nValid types: A+, A-, B+, B-, AB+, AB-, O+, O-", Toast.LENGTH_LONG).show();
+                        return;
+                    }
+
+                    if (!isValidPhoneNumber(mobile)) {
+                        Toast.makeText(RegisterActivity.this, "Invalid phone number.\nMust be a 9-digit number.", Toast.LENGTH_LONG).show();
+                        return;
+                    }
+
+                    if (!isValidPassword(password)) {
+                        Toast.makeText(RegisterActivity.this, "Invalid password.\nPassword must be at least 5 characters long.", Toast.LENGTH_LONG).show();
+                        return;
+                    }
+                    db.register(name,city,blood_group,mobile,password);
                     Toast.makeText(RegisterActivity.this, "Successfully Registered", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(RegisterActivity.this,LoginActivity.class));
+
                 }
             }
         });
+
+    }
+    public static boolean isValidBloodType(String bloodType) {
+        if (bloodType == null) return false;
+
+        String[] validBloodTypes = {"A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"};
+        for (String type : validBloodTypes) {
+            if (bloodType.equalsIgnoreCase(type)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    public static boolean isValidPhoneNumber(String phoneNumber) {
+        return phoneNumber != null && phoneNumber.matches("\\d{9}");
+    }
+
+    public static boolean isValidPassword(String password) {
+        return password != null && password.length() >= 5;
     }
 }
