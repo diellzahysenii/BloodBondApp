@@ -1,4 +1,4 @@
-package com.example.bloodbondapp.Menu;
+package com.example.bloodbondapp.Activities;
 
 import android.os.Bundle;
 

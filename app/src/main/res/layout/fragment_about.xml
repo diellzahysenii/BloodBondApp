@@ -5,12 +5,52 @@
     android:layout_height="match_parent"
     tools:context=".Menu.AboutFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="About us"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:background="@drawable/background_donation">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="About Us"
         android:textSize="30sp"
-        android:layout_margin="70dp"/>
+        android:textColor="@color/red"
+        android:layout_margin="10dp"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Welcome to Blood Bond, where every drop counts! Our mission is to connect generous donors with those in need of life-saving blood. With just a few taps, you can make a significant impact in your community and beyond."
+        android:textSize="20sp"
+        android:layout_margin="10dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Why Donate?"
+            android:textSize="20sp"
+            android:textColor="@color/red"
+            android:layout_margin="10dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Blood donations are vital for surgeries, trauma care, cancer treatments, and more. Your contribution can save lives and support patients during their most challenging times."
+            android:textSize="20sp"
+            android:layout_margin="10dp"/>
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Join Us"
+            android:textSize="20sp"
+            android:textColor="@color/red"
+            android:layout_margin="10dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Together, we can create a healthier future.Your willingness to give can make a profound difference in someone’s life!"
+            android:textSize="20sp"
+            android:layout_margin="10dp"/>
+
+</LinearLayout>
 </FrameLayout>
