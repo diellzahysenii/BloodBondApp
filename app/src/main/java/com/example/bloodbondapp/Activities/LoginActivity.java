@@ -16,6 +16,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.bloodbondapp.Menu.HomeFragment;
 import com.example.bloodbondapp.R;
 
 public class LoginActivity extends AppCompatActivity {
@@ -52,8 +53,13 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(LoginActivity.this, "Please fill all the details", Toast.LENGTH_SHORT).show();
                 } else {
                     if (db.login(mobile, password) == 1) {
+                        Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
+                        finish();  // Finish LoginActivity so it’s removed from the back stack
+
                         Toast.makeText(LoginActivity.this, "Successfully Logged in", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+                        startActivity(new Intent(LoginActivity.this, HomeFragment.class));
                     } else {
                         Toast.makeText(LoginActivity.this, "Invalid Number and password", Toast.LENGTH_SHORT).show();
                     }
