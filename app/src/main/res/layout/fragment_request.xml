@@ -3,12 +3,69 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activities.RequestFragment">
+    tools:context=".Activities.RequestFragment"
+    android:background="@drawable/background_donation">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:orientation="vertical"
+        android:padding="16dp">
+        <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+            android:textColor="@color/black"
+        android:text="Put you request information here"
+        android:textSize="23sp"
+        android:layout_margin="20dp"/>
+        <EditText
+            android:id="@+id/tvName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:text="Name: "
+            android:layout_marginBottom="12dp"
+            android:textSize="18sp" />
 
+        <EditText
+            android:id="@+id/tvCity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:autofillHints="Ferizaj"
+            android:textColor="@color/black"
+            android:text="City: "
+            android:layout_marginBottom="12dp"
+
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/tvBloodGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:text="Blood Group: "
+            android:layout_marginBottom="12dp"
+
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/tvMobile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:textColor="@color/black"
+            android:text="Mobile: "
+            android:textSize="18sp" />
+
+        <!-- Button to Post Donation -->
+        <Button
+            android:id="@+id/btnPostRequest"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="50dp"
+            android:text="Post Donation" />
+
+
+    </LinearLayout>
 </FrameLayout>

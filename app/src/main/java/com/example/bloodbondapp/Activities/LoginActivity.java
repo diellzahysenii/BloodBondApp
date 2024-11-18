@@ -49,22 +49,37 @@ public class LoginActivity extends AppCompatActivity {
                 String mobile = mobileEt.getText().toString();
                 Database db = new Database(getApplicationContext(), "bloodbondapp", null, 1);
 
+                // Check if the password or mobile fields are empty
                 if (password.isEmpty() || mobile.isEmpty()) {
                     Toast.makeText(LoginActivity.this, "Please fill all the details", Toast.LENGTH_SHORT).show();
                 } else {
+                    // Check if the login credentials are valid using db.login()
                     if (db.login(mobile, password) == 1) {
+                        // If login is successful, retrieve the user ID and save it to SharedPreferences
+                        int userId = db.getUserId(mobile, password);
+                        getSharedPreferences("UserSession", Context.MODE_PRIVATE)
+                                .edit()
+                                .putInt("userId", userId)
+                                .apply();
+
+
+                        // Navigate to HomeActivity and clear the current activity stack
                         Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);
-                        finish();  // Finish LoginActivity so it’s removed from the back stack
 
+                        // Finish the LoginActivity to remove it from the back stack
+                        finish();
+
+                        // Show login success message
                         Toast.makeText(LoginActivity.this, "Successfully Logged in", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(LoginActivity.this, HomeFragment.class));
                     } else {
+                        // If the login fails, show an error message
                         Toast.makeText(LoginActivity.this, "Invalid Number and password", Toast.LENGTH_SHORT).show();
                     }
                 }
             }
+
         });
 
         registerTextEt.setOnClickListener(new View.OnClickListener() {

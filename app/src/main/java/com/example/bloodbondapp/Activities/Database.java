@@ -15,8 +15,15 @@ public class Database extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        String qry1 = "CREATE TABLE users(name TEXT, city TEXT, blood_group TEXT, mobile TEXT, password TEXT)";
-        String qry2 = "CREATE TABLE donations(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, city TEXT, blood_group TEXT, mobile TEXT)";
+        String qry1 = "CREATE TABLE users(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, city TEXT, blood_group TEXT, mobile TEXT, password TEXT)";
+        String qry2 = "CREATE TABLE donations(" +
+                "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "user_id INTEGER, " +
+                "name TEXT, " +
+                "city TEXT, " +
+                "blood_group TEXT, " +
+                "mobile TEXT, " +
+                "FOREIGN KEY(user_id) REFERENCES users(id))";
         sqLiteDatabase.execSQL(qry1);
         sqLiteDatabase.execSQL(qry2);
     }
@@ -53,34 +60,24 @@ public class Database extends SQLiteOpenHelper {
 
         return result;
     }
-    public void postDonnation(String name, String city, String blood_group, String mobile){
-
+    public int getUserId(String mobile, String password) {
+        int userId = -1; // Default to -1 if login fails
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor c = db.rawQuery("SELECT id FROM users WHERE mobile=? AND password=?", new String[]{mobile, password});
+        if (c.moveToFirst()) {
+            userId = c.getInt(c.getColumnIndexOrThrow("id"));
+        }
+        c.close();
+        db.close();
+        return userId;
     }
-//    public int login(String mobile, String password) {
-//        int result = 0;
-//        String[] str = new String[2];
-//        str[0] = mobile;
-//        str[1] = password;
-//
-//        SQLiteDatabase db = getReadableDatabase();
-//        Cursor c = null;
-//
-//        try {
-//            c = db.rawQuery("SELECT * FROM users WHERE mobile=? AND password=?", str);
-//
-//            if (c.moveToFirst()) {
-//                result = 1;  // Login successful
-//            }
-//        } finally {
-//            // Ensure the Cursor is closed
-//            if (c != null) {
-//                c.close();
-//            }
-//            // Optionally close the database connection if not reused
-//             db.close();  // Uncomment this if you're not reusing the database connection
-//        }
-//
-//        return result;
-//    }
+    public Cursor getUserData(int userId) {
+        SQLiteDatabase db = getReadableDatabase();
+        return db.rawQuery("SELECT * FROM users WHERE id=?", new String[]{String.valueOf(userId)});
+    }
+
+
+
+
 
 }
