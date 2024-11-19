@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_marginTop="130dp"
+        android:layout_marginTop="100dp"
         android:padding="16dp">
 
         <TextView
@@ -46,6 +46,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:hint="your name"
+                android:enabled="false"
+                android:focusable="false"
                 android:textSize="18sp" />
         </LinearLayout>
 
@@ -72,6 +74,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:hint="your city"
+                android:enabled="false"
+                android:focusable="false"
                 android:textSize="18sp" />
         </LinearLayout>
 
@@ -98,6 +102,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:hint="your blood group"
+                android:enabled="false"
+                android:focusable="false"
                 android:textSize="18sp" />
         </LinearLayout>
 
@@ -124,6 +130,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:hint="your mobile number"
+                android:enabled="false"
+                android:focusable="false"
                 android:textSize="18sp"/>
         </LinearLayout>
 
@@ -134,6 +142,17 @@
             android:layout_height="wrap_content"
             android:layout_margin="50dp"
             android:background="@drawable/button_bg"
-            android:text="Post Donation" />
+            android:text="Post Donation"
+            android:textColor="@color/white"/>
+        <TextView
+            android:id="@+id/deleteDonationText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Delete My Donation"
+            android:textColor="@android:color/darker_gray"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:clickable="true"
+            android:focusable="true"/>
     </LinearLayout>
 </FrameLayout>

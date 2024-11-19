@@ -71,10 +71,60 @@ public class Database extends SQLiteOpenHelper {
         db.close();
         return userId;
     }
+    public boolean insertDonation(int userId, String name, String city, String bloodGroup, String mobile) {
+        // Open the database for writing
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        // Create a ContentValues object to hold the data
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("user_id", userId);
+        contentValues.put("name", name);
+        contentValues.put("city", city);
+        contentValues.put("blood_group", bloodGroup);
+        contentValues.put("mobile", mobile);
+
+        // Insert the data into the donations table
+        long result = db.insert("donations", null, contentValues);
+        db.close();
+
+        // Return true if insertion was successful, otherwise false
+        return result != -1;
+    }
+    public boolean checkDuplicateDonation(int userId, String userName, String userCity, String userBloodGroup, String userMobile) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(
+                "donations", // Table name
+                null,        // All columns
+                "user_id = ? AND name = ? AND city = ? AND blood_group = ? AND mobile = ?", // WHERE clause
+                new String[]{String.valueOf(userId), userName, userCity, userBloodGroup, userMobile}, // Arguments
+                null,        // Group by
+                null,        // Having
+                null         // Order by
+        );
+
+        boolean exists = (cursor != null && cursor.getCount() > 0);
+        if (cursor != null) cursor.close();
+        db.close();
+        return exists;
+    }
+
     public Cursor getUserData(int userId) {
         SQLiteDatabase db = getReadableDatabase();
         return db.rawQuery("SELECT * FROM users WHERE id=?", new String[]{String.valueOf(userId)});
     }
+    public Cursor getAllDonations() {
+        SQLiteDatabase db = getReadableDatabase();
+        // Ensure the "donations" table and columns exist, adjust names if needed
+        return db.rawQuery("SELECT name, city, blood_group, mobile FROM donations", null);
+    }
+    public boolean deleteDonation(int userId) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        int rowsAffected = db.delete("donations", "user_id = ?", new String[]{String.valueOf(userId)});
+        db.close();
+        return rowsAffected > 0; // Return true if at least one row was deleted
+    }
+
+
 
 
 

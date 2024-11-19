@@ -3,15 +3,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Menu.HomeFragment">
+    tools:context=".Menu.HomeFragment"
+    android:background="@drawable/homefragmentbg">
 
-    <!-- TODO: Update blank fragment layout  -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/hello_blank_fragment"
-        android:textSize="30sp"
-        android:layout_centerInParent="true"
-        android:textColor="@color/red"/>
-
+    <!-- ListView to display donations -->
+    <ListView
+        android:id="@+id/donationListView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="4dp"
+        android:padding="16dp" />
 </RelativeLayout>

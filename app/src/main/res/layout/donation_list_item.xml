@@ -1,0 +1,53 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp"
+    android:background="@drawable/rounded_background"
+    android:layout_marginBottom="8dp">
+
+    <!-- Name -->
+    <TextView
+        android:id="@+id/tvName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Name: Diellza"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:layout_alignParentStart="true"
+        android:layout_marginEnd="8dp" />
+
+    <!-- City -->
+    <TextView
+        android:id="@+id/tvCity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="City: New York"
+        android:textSize="16sp"
+        android:textColor="@color/black"
+        android:layout_below="@id/tvName"
+        android:layout_alignStart="@id/tvName" />
+
+    <!-- Mobile -->
+    <TextView
+        android:id="@+id/tvMobile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mobile: 1234567890"
+        android:textSize="16sp"
+        android:textColor="@color/black"
+        android:layout_below="@id/tvCity"
+        android:layout_alignStart="@id/tvCity" />
+
+    <!-- Blood Group -->
+    <TextView
+        android:id="@+id/tvBloodGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="O+"
+        android:textSize="26sp"
+    android:textColor="#FF0000"
+    android:layout_alignParentEnd="true"
+    android:layout_centerVertical="true"
+    android:layout_marginStart="16dp" />
+</RelativeLayout>
