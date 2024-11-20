@@ -101,6 +101,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     }
 
 
+
+
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer);
@@ -115,7 +117,42 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.nav_menu, menu);
+        getMenuInflater().inflate(R.menu.actionbar, menu);
+
+        // Get the search menu item
+        MenuItem searchItem = menu.findItem(R.id.action_search);
+
+        // Get the SearchView
+        androidx.appcompat.widget.SearchView searchView = (androidx.appcompat.widget.SearchView) searchItem.getActionView();
+
+        // Configure the SearchView
+        searchView.setQueryHint("Search blood group...");
+        searchView.setIconifiedByDefault(true);
+
+        // Set up a listener for search input
+        searchView.setOnQueryTextListener(new androidx.appcompat.widget.SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                filterHomeFragment(query);
+                searchView.clearFocus();
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                filterHomeFragment(newText);
+                return false;
+            }
+        });
+
         return true;
+    }
+
+    private void filterHomeFragment(String query) {
+        HomeFragment homeFragment = (HomeFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+        if (homeFragment != null) {
+            homeFragment.filterDonations(query);
+        }
     }
 
 
