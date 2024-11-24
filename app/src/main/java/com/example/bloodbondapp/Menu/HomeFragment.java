@@ -35,103 +35,44 @@ public class HomeFragment extends Fragment {
         donationListView = view.findViewById(R.id.donationListView);
 
         // Initialize Database helper
-        dbHelper = new Database(getContext(), "bloodbondapp", null, 1);
+        dbHelper = new Database(getContext(), "bloodbondapp", null, 2);
 
         // Retrieve and display the donations
         loadDonations();
 
         return view;
     }
-    private String getColumnString(Cursor cursor, String columnName) {
-        int columnIndex = cursor.getColumnIndex(columnName);
-        if (columnIndex != -1) {
-            return cursor.getString(columnIndex);
-        } else {
-            // If column doesn't exist, log the error and return a default value
-            Log.e("HomeFragment", "Column '" + columnName + "' not found in the database.");
-            return "N/A"; // You can return a default value here
-        }
-    }
-
-
-//    private void loadDonations() {
-//        // Query the database to retrieve all donations
-//        Cursor cursor = dbHelper.getAllDonations();  // Make sure this method is implemented in your Database class
-//
-//        // Create a list to store donation data
-//        ArrayList<HashMap<String, String>> donationList = new ArrayList<>();
-//
-//        // Check if cursor has data
-//        if (cursor != null && cursor.moveToFirst()) {
-//            do {
-//                // Create a HashMap to store each donation's details
-//                HashMap<String, String> donation = new HashMap<>();
-//                donation.put("name", getColumnString(cursor, "name"));
-//                donation.put("city", getColumnString(cursor, "city"));
-//                donation.put("blood_group", getColumnString(cursor, "blood_group"));
-//                donation.put("mobile", getColumnString(cursor, "mobile"));
-//
-//                donationList.add(donation);  // Add the HashMap to the list
-//            } while (cursor.moveToNext());
-//
-//            // Close the cursor
-//            cursor.close();
-//
-//            // Define the columns to be displayed
-//            String[] from = {"name", "city", "blood_group", "mobile"};
-//            int[] to = {R.id.tvName, R.id.tvCity, R.id.tvBloodGroup, R.id.tvMobile};
-//
-//            // Create a SimpleAdapter to bind the data to the ListView
-//            SimpleAdapter adapter = new SimpleAdapter(
-//                    getContext(),
-//                    donationList,
-//                    R.layout.donation_list_item,  // Create a custom layout for each donation item
-//                    from,
-//                    to
-//            );
-//
-//            donationListView.setAdapter(adapter);
-//            // Set the adapter to the ListView
-//        } else {
-//            Toast.makeText(getContext(), "No donations available", Toast.LENGTH_SHORT).show();
-//        }
-//    }
     private void loadDonations() {
-        // Query the database to retrieve all donations
-        Cursor cursor = dbHelper.getAllDonations();  // Ensure this method is implemented in your Database class
+        // Show a loading indicator (optional)
+        Toast.makeText(getContext(), "Loading donations...", Toast.LENGTH_SHORT).show();
 
-        // Clear the donation list
-        donationList.clear();
+        // Use the asynchronous method to fetch donations
+        dbHelper.getAllDonationsAsync(donations -> {
+            // Clear the existing donation list
+            donationList.clear();
 
-        // Check if cursor has data
-        if (cursor != null && cursor.moveToFirst()) {
-            do {
-                HashMap<String, String> donation = new HashMap<>();
-                donation.put("name", getColumnString(cursor, "name"));
-                donation.put("city", getColumnString(cursor, "city"));
-                donation.put("blood_group", getColumnString(cursor, "blood_group"));
-                donation.put("mobile", getColumnString(cursor, "mobile"));
+            if (donations != null && !donations.isEmpty()) {
+                // Add the fetched donations to the list
+                donationList.addAll(donations);
 
-                donationList.add(donation);
-            } while (cursor.moveToNext());
+                // Define the columns to be displayed
+                String[] from = {"name", "city", "blood_group", "mobile"};
+                int[] to = {R.id.tvName, R.id.tvCity, R.id.tvBloodGroup, R.id.tvMobile};
 
-            cursor.close();
-        }
+                // Create and set the SimpleAdapter
+                adapter = new SimpleAdapter(
+                        getContext(),
+                        donationList,
+                        R.layout.donation_list_item,
+                        from,
+                        to
+                );
 
-        // Define the columns to be displayed
-        String[] from = {"name", "city", "blood_group", "mobile"};
-        int[] to = {R.id.tvName, R.id.tvCity, R.id.tvBloodGroup, R.id.tvMobile};
-
-        // Create a SimpleAdapter
-        adapter = new SimpleAdapter(
-                getContext(),
-                donationList,
-                R.layout.donation_list_item,
-                from,
-                to
-        );
-
-        donationListView.setAdapter(adapter); // Set the adapter
+                donationListView.setAdapter(adapter); // Set the adapter
+            } else {
+                Toast.makeText(getContext(), "No donations available", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     public void filterDonations(String query) {
@@ -155,4 +96,7 @@ public class HomeFragment extends Fragment {
 
         donationListView.setAdapter(adapter);
     }
+
+
+
 }

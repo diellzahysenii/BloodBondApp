@@ -45,7 +45,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String password = passwordEt.getText().toString();
                 String mobile = mobileEt.getText().toString();
-                Database db = new Database(getApplicationContext(), "bloodbondapp", null, 1);
+                Database db = new Database(getApplicationContext(), "bloodbondapp", null, 2);
 
                 // Check if the password or mobile fields are empty
                 if (password.isEmpty() || mobile.isEmpty()) {

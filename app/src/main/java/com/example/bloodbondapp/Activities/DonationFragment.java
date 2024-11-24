@@ -1,33 +1,26 @@
 package com.example.bloodbondapp.Activities;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.bloodbondapp.R;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 
 public class DonationFragment extends Fragment {
 
-    //private TextView tvUserName, tvUserCity, tvUserBloodGroup, tvUserMobile;
+
     private Button btnPostDonation;
     TextView deleteDonationText;
     private Database dbHelper;
@@ -47,7 +40,7 @@ public class DonationFragment extends Fragment {
         deleteDonationText=view.findViewById(R.id.deleteDonationText);
 
         // Initialize the dbHelper
-        dbHelper = new Database(getContext(), "bloodbondapp", null, 1);
+        dbHelper = new Database(getContext(), "bloodbondapp", null, 2);
 
         // Get the logged-in user's ID
         int userId = getLoggedInUserId();
@@ -136,6 +129,7 @@ public class DonationFragment extends Fragment {
             Toast.makeText(getContext(), "User data not found!", Toast.LENGTH_SHORT).show();
         }
     }
+
 
 
 

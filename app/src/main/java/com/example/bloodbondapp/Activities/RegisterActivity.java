@@ -44,7 +44,7 @@ public class RegisterActivity extends AppCompatActivity {
                 blood_group = bloodGroupEt.getText().toString();
                 password = passwordEt.getText().toString();
                 mobile = mobileEt.getText().toString();
-                Database db =new Database(getApplicationContext(),"bloodbondapp",null,1);
+                Database db =new Database(getApplicationContext(),"bloodbondapp",null,2);
 
                 if (name.isEmpty() || city.isEmpty() || blood_group.isEmpty() || password.isEmpty() || mobile.isEmpty()) {
                     Toast.makeText(RegisterActivity.this, "Please fill all the details", Toast.LENGTH_SHORT).show();

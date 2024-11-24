@@ -2,7 +2,6 @@
 package com.example.bloodbondapp.Activities;
 
 import androidx.activity.EdgeToEdge;
-import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
@@ -35,7 +34,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this); // Comment this if unnecessary
+        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_home);
 
         // Initialize the toolbar
@@ -70,7 +69,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         if (userId != -1) {
             // Get user data from the database
-            Database db = new Database(this, "bloodbondapp", null, 1);
+            Database db = new Database(this, "bloodbondapp", null, 2);
             Cursor cursor = db.getUserData(userId);
 
             // Check if cursor is not null and move to the first record
@@ -98,6 +97,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                     .replace(R.id.fragment_container, new HomeFragment())  // Replace with HomeFragment
                     .commit();
         }
+
     }
 
 
@@ -128,6 +128,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         // Configure the SearchView
         searchView.setQueryHint("Search blood group...");
         searchView.setIconifiedByDefault(true);
+
 
         // Set up a listener for search input
         searchView.setOnQueryTextListener(new androidx.appcompat.widget.SearchView.OnQueryTextListener() {

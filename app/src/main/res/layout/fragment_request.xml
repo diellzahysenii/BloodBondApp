@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -6,66 +5,164 @@
     tools:context=".Activities.RequestFragment"
     android:background="@drawable/background_donation">
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        android:layout_marginTop="50dp"
         android:padding="16dp">
+
+        <!-- Title -->
         <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-            android:textColor="@color/black"
-        android:text="Put you request information here"
-        android:textSize="23sp"
-        android:layout_margin="20dp"/>
-        <EditText
-            android:id="@+id/tvName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:text="Name: "
-            android:layout_marginBottom="12dp"
-            android:textSize="18sp" />
+            android:textColor="@color/red"
+            android:text="Request for Blood"
+            android:textStyle="bold"
+            android:textSize="25sp"
+            android:layout_gravity="center"
+            android:layout_margin="20dp" />
 
-        <EditText
-            android:id="@+id/tvCity"
-            android:layout_width="wrap_content"
+        <!-- Name Row -->
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:autofillHints="Ferizaj"
-            android:textColor="@color/black"
-            android:text="City: "
+            android:orientation="horizontal"
             android:layout_marginBottom="12dp"
+            android:gravity="center_vertical"
+            android:background="@drawable/rounded_background"
+            android:minHeight="48dp">
 
-            android:textSize="18sp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Your Name: "
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:layout_marginEnd="8dp" />
 
-        <EditText
-            android:id="@+id/tvBloodGroup"
-            android:layout_width="wrap_content"
+            <EditText
+                android:id="@+id/etRequesterName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Enter your name"
+                android:textSize="18sp"
+                android:minHeight="48dp"
+                android:padding="10dp" />
+        </LinearLayout>
+
+        <!-- City Row -->
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:text="Blood Group: "
+            android:orientation="horizontal"
             android:layout_marginBottom="12dp"
+            android:gravity="center_vertical"
+            android:background="@drawable/rounded_background"
+            android:minHeight="48dp">
 
-            android:textSize="18sp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="City: "
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:layout_marginEnd="8dp" />
 
-        <EditText
-            android:id="@+id/tvMobile"
-            android:layout_width="wrap_content"
+            <EditText
+                android:id="@+id/etRequesterCity"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Enter your city"
+                android:textSize="18sp"
+                android:minHeight="48dp"
+                android:padding="10dp" />
+        </LinearLayout>
+
+        <!-- Blood Group Row -->
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="horizontal"
             android:layout_marginBottom="12dp"
-            android:textColor="@color/black"
-            android:text="Mobile: "
-            android:textSize="18sp" />
+            android:gravity="center_vertical"
+            android:background="@drawable/rounded_background"
+            android:minHeight="48dp">
 
-        <!-- Button to Post Donation -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Blood Group: "
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:layout_marginEnd="8dp" />
+
+            <Spinner
+                android:id="@+id/spinnerBloodGroup"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:minHeight="48dp"
+                android:padding="10dp" />
+        </LinearLayout>
+
+        <!-- Mobile Row -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="12dp"
+            android:gravity="center_vertical"
+            android:background="@drawable/rounded_background"
+            android:minHeight="48dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mobile: "
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:layout_marginEnd="8dp" />
+
+            <EditText
+                android:id="@+id/etRequesterMobile"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Enter your mobile number"
+                android:inputType="phone"
+                android:textSize="18sp"
+                android:minHeight="48dp"
+                android:padding="10dp" />
+        </LinearLayout>
+
+        <!-- Button to Post Request -->
         <Button
             android:id="@+id/btnPostRequest"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="50dp"
-            android:text="Post Donation" />
+            android:background="@drawable/button_bg"
+            android:text="Post Request"
+            android:textColor="@color/white"
+            android:minHeight="48dp" />
 
-
+        <!-- Delete Request -->
+        <TextView
+            android:id="@+id/deleteRequestText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Delete My Request"
+            android:textColor="@android:color/darker_gray"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:padding="10dp"
+            android:minHeight="48dp" />
     </LinearLayout>
+
 </FrameLayout>
